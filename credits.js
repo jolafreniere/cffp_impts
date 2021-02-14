@@ -716,6 +716,7 @@ let cf7 = Credit("Crédit d'impôt pour personne à charge",
             }
             for (let i = 0; i < x.kidAmount; i++) {
                 if (x.kids[i].age < 18 && x.kids[i].revenue < maxkidrev) {
+                    console.log(maxkidrev+"########################################");
                     kidsUnder18WithLowRevenue = true;
                 }
             }
