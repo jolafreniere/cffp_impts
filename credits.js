@@ -338,8 +338,10 @@ let cf6 = Credit("Crédit d'impôt pour époux ou conjoint de fait",
         }
 
         if (x.revenue >= params.MIN_REV_P2) {
-            maxPartnerRev = 12298;
+            maxPartnerRev = params.MAX_REV_PARTNER_P2;
         }
+        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
+        console.log(maxPartnerRev);
         return x.hasPartner && x.partner.revenue < maxPartnerRev;
     }
 );
@@ -679,9 +681,30 @@ Art. 1029.8.67 LI.
 `;
 cp10.reference = "http://cffp.recherche.usherbrooke.ca/outils-ressources/guide-mesures-fiscales/credit-impot-frais-garde-enfants/";
 
+/*
+
+
+let cf6 = Credit("Crédit d'impôt pour époux ou conjoint de fait",
+    (x, p) => {
+        let params = p["FED_EPOUX_CONJOINT"];
+        let maxPartnerRev = params.MAX_REV_PARTNER;
+        if(x.revenue > params.MIN_REV){
+            maxPartnerRev = params.MAX_REV_PARTNER - ((x.revenue - params.MIN_REV)*0.01457);
+        }
+
+        if (x.revenue >= params.MIN_REV_P2) {
+            maxPartnerRev = params.MAX_REV_PARTNER_P2;
+        }
+        return x.hasPartner && x.partner.revenue < maxPartnerRev;
+    }
+);
+
+
+*/
+
 let cf7 = Credit("Crédit d'impôt pour personne à charge",
     (x, cp) => {
-        let params = CREDIT_PARAMETERS["FED_PERSONNE_A_CHARGE"]
+        let params = cp["FED_PERSONNE_A_CHARGE"]
         let kidsUnder18WithLowRevenue = false;
         if (x.hasKids) {
             let maxkidrev = params.MAX_KID_REV;
@@ -737,7 +760,7 @@ cf14.reference = "http://cffp.recherche.usherbrooke.ca/outils-ressources/guide-m
 cf14.type_credit = "Déduction";
 
 
-let cf9 = Credit("Crédit canadien pour emploi", //Non remboursable 
+let cf9 = Credit("Crédit canadien pour emploi", 
     (x) => {
         return x.revenue_type.emploi;
     }
@@ -746,7 +769,7 @@ cf9.category = "Mesures relatives au travail";
 cf9.type_credit = "Non remboursable";
 cf9.reference = "http://cffp.recherche.usherbrooke.ca/outils-ressources/guide-mesures-fiscales/credit-canadien-emploi/";
 
-let csp8 = Credit("Crédit d'impôt remboursable pour frais médicaux", //TODO: INCORRECT VALUES?
+let csp8 = Credit("Crédit d'impôt remboursable pour frais médicaux",
     (x) => {
         return x.sante.frais_medicaux_admissibles == 'true' 
         && (x.revenue_type.emploi || x.revenue_type.travailleur_autonome) 
