@@ -709,8 +709,10 @@ let cf7 = Credit("Crédit d'impôt pour personne à charge",
         if (x.hasKids) {
             let maxkidrev = params.MAX_KID_REV;
             if(x.revenue > params.MAX_REV){
-                maxkidrev = maxkidrev - ((x.revenue - params.MIN_REV_P2)*0.01457);
+                maxkidrev = params.MAX_KID_REV - ((x.revenue - params.MIN_REV_P2)*0.01457);
+                console.log(maxkidrev+"########################################111");
             }
+            
             if(x.revenue >= params.MIN_REV_P2){
                 maxkidrev = params.MAX_KID_REV_P2;
             }
