@@ -340,8 +340,6 @@ let cf6 = Credit("Crédit d'impôt pour époux ou conjoint de fait",
         if (x.revenue >= params.MIN_REV_P2) {
             maxPartnerRev = params.MAX_REV_PARTNER_P2;
         }
-        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4");
-        console.log(maxPartnerRev);
         return x.hasPartner && x.partner.revenue < maxPartnerRev;
     }
 );
@@ -710,7 +708,8 @@ let cf7 = Credit("Crédit d'impôt pour personne à charge",
             let maxkidrev = params.MAX_KID_REV;
             if(x.revenue > params.MAX_REV){
                 maxkidrev = params.MAX_KID_REV - ((x.revenue - params.MIN_REV_P2)*0.01457);
-                console.log(maxkidrev+"########################################111");
+                let y = [params.MAX_KID_REV+"MKR", x.revenue +"REV", params.MIN_REV_P2+"MRP2"];
+                console.log(y);
             }
             
             if(x.revenue >= params.MIN_REV_P2){
