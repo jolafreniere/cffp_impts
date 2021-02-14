@@ -708,8 +708,6 @@ let cf7 = Credit("Crédit d'impôt pour personne à charge",
             let maxkidrev = params.MAX_KID_REV;
             if(x.revenue > params.MAX_REV){
                 maxkidrev = params.MAX_KID_REV - ((x.revenue - params.MAX_REV)*0.01457);
-                let y = [params.MAX_KID_REV+"MKR", x.revenue +"REV", params.MIN_REV_P2+"MRP2"];
-                console.log(y);
             }
             
             if(x.revenue >= params.MIN_REV_P2){
@@ -717,7 +715,6 @@ let cf7 = Credit("Crédit d'impôt pour personne à charge",
             }
             for (let i = 0; i < x.kidAmount; i++) {
                 if (x.kids[i].age < 18 && x.kids[i].revenue < maxkidrev) {
-                    console.log(maxkidrev+"########################################");
                     kidsUnder18WithLowRevenue = true;
                 }
             }
