@@ -1220,8 +1220,7 @@ let cp0_a = Credit("Crédit d'impôt pour personne vivant seule", (x, params) =>
     }) &&
     !(x.plusieurs_props_locs == "true") &&
     !x.revenue_type.retraite &&
-    x.revenue < cp.LINE11_MAXREV &&
-    x.logement_admissible == "true"
+    x.revenue < cp.LINE11_MAXREV
   );
 });
 addVivantSeuleInfo(cp0_a);
@@ -1243,8 +1242,7 @@ let cp0_b = Credit("Crédit d'impôt pour personne vivant seule", (x, params) =>
     }) &&
     !(x.plusieurs_props_locs == "true") &&
     !x.revenue_type.retraite &&
-    x.revenue < cp.LINE12_MAXREV &&
-    x.logement_admissible == "true"
+    x.revenue < cp.LINE12_MAXREV
   );
 });
 addVivantSeuleInfo(cp0_b);
@@ -1361,8 +1359,7 @@ let cp1_6a = Credit(
       }) &&
       !(x.plusieurs_props_locs == "true") &&
       !x.revenue_type.retraite &&
-      x.revenue < cp.LINE4_MAXREV &&
-      x.logement_admissible == "true"
+      x.revenue < cp.LINE4_MAXREV
     );
   }
 );
@@ -1403,8 +1400,7 @@ let cp1_7a = Credit(
       }) &&
       !(x.plusieurs_props_locs == "true") &&
       !x.revenue_type.retraite &&
-      x.revenue < cp.LINE5_MAXREV &&
-      x.logement_admissible == "true"
+      x.revenue < cp.LINE5_MAXREV
     );
   }
 );
@@ -1438,8 +1434,7 @@ let cp1_8a = Credit(
       }) &&
       !(x.plusieurs_props_locs == "true") &&
       x.revenue_type.retraite &&
-      x.revenue < cp.LINE6_MAXREV &&
-      x.logement_admissible == "true"
+      x.revenue < cp.LINE6_MAXREV
     );
   }
 );
@@ -1495,8 +1490,7 @@ let cp1_9a = Credit(
       }) &&
       !(x.plusieurs_props_locs == "true") &&
       x.revenue_type.retraite &&
-      x.revenue < cp.LINE7_MAXREV &&
-      x.logement_admissible == "true"
+      x.revenue < cp.LINE7_MAXREV
     );
   }
 );
@@ -1632,8 +1626,7 @@ let cpf2_4a = Credit(
       ) &&
       !x.hasPartner &&
       x.revenue_type.retraite &&
-      revenu_familial(x) < cp.LINE9_MAXREV &&
-      x.logement_admissible == "true"
+      revenu_familial(x) < cp.LINE9_MAXREV
     );
   }
 );
@@ -1674,8 +1667,7 @@ let cpf2_5a = Credit(
       }) &&
       x.plusieurs_props_locs == "false" &&
       x.revenue < cp.LINE10_MAXREV &&
-      x.revenue_type.retraite &&
-      x.logement_admissible == "true"
+      x.revenue_type.retraite
     );
   }
 );
@@ -1733,8 +1725,7 @@ let cpf2_6b = Credit(
       !kidO18StudyFullTime &&
       x.plusieurs_props_locs == "false" &&
       x.revenue < cp.LINE6_MAXREV &&
-      x.revenue_type.retraite &&
-      x.logement_admissible == "true"
+      x.revenue_type.retraite
     );
   }
 );
@@ -1792,8 +1783,7 @@ let cpf2_7b = Credit(
       }) &&
       x.plusieurs_props_locs == "false" &&
       x.revenue < cp.LINE7_MAXREV &&
-      x.revenue_type.retraite &&
-      x.logement_admissible == "true"
+      x.revenue_type.retraite
     );
   }
 );
@@ -1906,7 +1896,6 @@ function hasKidBelow19(userProfile) {
 }
 
 function hasKid(x, pred) {
-  //TODO: use this function everywhere possible
   if (!x.hasKids) {
     return false;
   } else {
