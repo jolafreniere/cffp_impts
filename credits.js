@@ -1408,7 +1408,7 @@ addVivantSeuleInfo(cp1_7a);
 let cp1_8 = Credit("Crédit en raison de l'âge", (x, params) => {
   let cp = params["AGE_RET_PVS"];
 
-  return (
+  let res =
     x.age >= 65 &&
     !x.hasPartner &&
     !hasKid(x, (kid) => {
@@ -1416,8 +1416,9 @@ let cp1_8 = Credit("Crédit en raison de l'âge", (x, params) => {
     }) &&
     !(x.plusieurs_props_locs == "true") &&
     x.revenue_type.retraite &&
-    x.revenue < cp.LINE6_MAXREV
-  );
+    x.revenue < cp.LINE6_MAXREV;
+
+  return res;
 });
 addCreditAgeInfo(cp1_8);
 
@@ -1425,17 +1426,8 @@ let cp1_8a = Credit(
   "Crédit d'impôt pour personne vivant seule",
   (x, params) => {
     let cp = params["AGE_RET_PVS"];
-    console.log(
-      "SHOULD RETURN TRUE:" + x.age >= 65 &&
-        !x.hasPartner &&
-        !hasKid(x, (kid) => {
-          return kid.age >= 18;
-        }) &&
-        !(x.plusieurs_props_locs == "true") &&
-        x.revenue_type.retraite &&
-        x.revenue < cp.LINE6_MAXREV
-    );
-    return (
+
+    let res =
       x.age >= 65 &&
       !x.hasPartner &&
       !hasKid(x, (kid) => {
@@ -1443,8 +1435,10 @@ let cp1_8a = Credit(
       }) &&
       !(x.plusieurs_props_locs == "true") &&
       x.revenue_type.retraite &&
-      x.revenue < cp.LINE6_MAXREV
-    );
+      x.revenue < cp.LINE6_MAXREV;
+    console.log("RES");
+    console.log(res);
+    return res;
   }
 );
 addVivantSeuleInfo(cp1_8a);
