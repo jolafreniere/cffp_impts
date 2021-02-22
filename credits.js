@@ -1425,7 +1425,16 @@ let cp1_8a = Credit(
   "Crédit d'impôt pour personne vivant seule",
   (x, params) => {
     let cp = params["AGE_RET_PVS"];
-
+    console.log(
+      "SHOULD RETURN TRUE:" + x.age >= 65 &&
+        !x.hasPartner &&
+        !hasKid(x, (kid) => {
+          return kid.age >= 18;
+        }) &&
+        !(x.plusieurs_props_locs == "true") &&
+        x.revenue_type.retraite &&
+        x.revenue < cp.LINE6_MAXREV
+    );
     return (
       x.age >= 65 &&
       !x.hasPartner &&
