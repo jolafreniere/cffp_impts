@@ -504,7 +504,6 @@ let csp1 = Credit("Crédit d'impôt pour frais médicaux", (x, app_parameters) =
   return (
     revenu_familial(x) < params.MAX_REV_FAM &&
     (x.revenue_type.emploi || x.revenue_type.travailleur_autonome) &&
-    x.revenue >= params.MIN_REV_FAM &&
     x.sante.frais_medicaux_admissibles == "true"
   );
 });
@@ -849,14 +848,18 @@ cf9.type_credit = "Non remboursable";
 cf9.reference =
   "http://cffp.recherche.usherbrooke.ca/outils-ressources/guide-mesures-fiscales/credit-canadien-emploi/";
 
-let csp8 = Credit("Crédit d'impôt remboursable pour frais médicaux", (x) => {
-  return (
-    x.sante.frais_medicaux_admissibles == "true" &&
-    (x.revenue_type.emploi || x.revenue_type.travailleur_autonome) &&
-    revenu_familial(x) < 47400 &&
-    x.revenue >= 3080
-  );
-});
+let csp8 = Credit(
+  "Crédit d'impôt remboursable pour frais médicaux",
+  (x, params) => {
+    let cp = params["PROV_FRAIS_MEDIC"];
+    return (
+      x.sante.frais_medicaux_admissibles == "true" &&
+      (x.revenue_type.emploi || x.revenue_type.travailleur_autonome) &&
+      revenu_familial(x) < cp.MAX_REV_FAM &&
+      revenu_familial(x) >= cp.MIN_REV_FAM
+    );
+  }
+);
 csp8.type_credit = "Remboursable";
 csp8.reference =
   "https://cffp.recherche.usherbrooke.ca/outils-ressources/guide-mesures-fiscales/supplement-et-credit-impot-frais-medicaux/";
@@ -1408,7 +1411,7 @@ addVivantSeuleInfo(cp1_7a);
 let cp1_8 = Credit("Crédit en raison de l'âge", (x, params) => {
   let cp = params["AGE_RET_PVS"];
 
-  let res =
+  return (
     x.age >= 65 &&
     !x.hasPartner &&
     !hasKid(x, (kid) => {
@@ -1416,9 +1419,8 @@ let cp1_8 = Credit("Crédit en raison de l'âge", (x, params) => {
     }) &&
     !(x.plusieurs_props_locs == "true") &&
     x.revenue_type.retraite &&
-    x.revenue < cp.LINE6_MAXREV;
-
-  return res;
+    x.revenue < cp.LINE6_MAXREV
+  );
 });
 addCreditAgeInfo(cp1_8);
 
@@ -1427,7 +1429,7 @@ let cp1_8a = Credit(
   (x, params) => {
     let cp = params["AGE_RET_PVS"];
 
-    let res =
+    return (
       x.age >= 65 &&
       !x.hasPartner &&
       !hasKid(x, (kid) => {
@@ -1435,10 +1437,8 @@ let cp1_8a = Credit(
       }) &&
       !(x.plusieurs_props_locs == "true") &&
       x.revenue_type.retraite &&
-      x.revenue < cp.LINE6_MAXREV;
-    console.log("RES");
-    console.log(res);
-    return res;
+      x.revenue < cp.LINE6_MAXREV
+    );
   }
 );
 addVivantSeuleInfo(cp1_8a);
