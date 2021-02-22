@@ -1096,7 +1096,7 @@ let cp14 = Credit(
         if (x.qt_props_locs == 2) {
           if (x.revenue < cp.NP_2L_MAXREV) return true;
         } else if (x.qt_props_locs == 3) {
-          if (x.revenue < NP_3L_MAXREV) return true;
+          if (x.revenue < cp.NP_3L_MAXREV) return true;
         } else if (x.qt_props_locs == 4) {
           if (x.revenue < cp.NP_4L_MAXREV) return true;
         }
