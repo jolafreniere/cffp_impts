@@ -1211,6 +1211,7 @@ cf13.reference =
 let cp0_a = Credit("Crédit d'impôt pour personne vivant seule", (x, params) => {
   let cp = params["AGE_RET_PVS"];
   return (
+    x.logement_admissible == "true" &&
     x.age < 65 &&
     !x.hasPartner &&
     !hasKid(x, (kid) => {
@@ -1226,6 +1227,7 @@ addVivantSeuleInfo(cp0_a);
 let cp0_b = Credit("Crédit d'impôt pour personne vivant seule", (x, params) => {
   let cp = params["AGE_RET_PVS"];
   return (
+    x.logement_admissible == "true" &&
     x.age < 65 &&
     !x.hasPartner &&
     hasKid(x, (kid) => {
@@ -1350,6 +1352,7 @@ let cp1_6a = Credit(
   (x, params) => {
     let cp = params["AGE_RET_PVS"];
     return (
+      x.logement_admissible == "true" &&
       x.age >= 65 &&
       !x.hasPartner &&
       !hasKid(x, (kid) => {
@@ -1387,6 +1390,7 @@ let cp1_7a = Credit(
     });
     return (
       x.age >= 65 &&
+      x.logement_admissible == "true" &&
       !x.hasPartner &&
       kidO18StudyFullTime &&
       !hasKid(x, (kid) => {
@@ -1426,6 +1430,7 @@ let cp1_8a = Credit(
 
     return (
       x.age >= 65 &&
+      x.logement_admissible == "true" &&
       !x.hasPartner &&
       !hasKid(x, (kid) => {
         return kid.age >= 18;
@@ -1477,6 +1482,7 @@ let cp1_9a = Credit(
     });
     return (
       x.age >= 65 &&
+      x.logement_admissible == "true" &&
       !x.hasPartner &&
       kidO18StudyFullTime &&
       !hasKid(x, (kid) => {
@@ -1617,6 +1623,7 @@ let cpf2_4a = Credit(
 
     return (
       x.age < 65 &&
+      x.logement_admissible == "true" &&
       !(
         hasKid(x, (kid) => {
           return kid.age >= 18;
@@ -1654,6 +1661,7 @@ let cpf2_5a = Credit(
     });
     return (
       !x.hasPartner &&
+      x.logement_admissible == "true" &&
       x.age < 65 &&
       kidO18StudyFullTime &&
       !hasKid(x, (kid) => {
@@ -1713,6 +1721,7 @@ let cpf2_6b = Credit(
 
     return (
       !x.hasPartner &&
+      x.logement_admissible == "true" &&
       x.age >= 65 &&
       !hasKid(x, (kid) => {
         return (
@@ -1771,6 +1780,7 @@ let cpf2_7b = Credit(
     });
     return (
       !x.hasPartner &&
+      x.logement_admissible == "true" &&
       x.age >= 65 &&
       kidO18StudyFullTime &&
       !hasKid(x, (kid) => {
