@@ -500,12 +500,7 @@ csp3.lien_additionnel =
 csp3.note = `<a href="http://cffp.recherche.usherbrooke.ca/outils-ressources/guide-mesures-fiscales/credit-canadien-aidant-naturel/credit-canadien-pour-aidant-naturel-simulateur/#personne_charge_majeure" target="_blank">Lien vers le calculateur</a>`;
 
 let csp1 = Credit("Crédit d'impôt pour frais médicaux", (x, app_parameters) => {
-  let params = app_parameters["PROV_FRAIS_MEDIC"];
-  return (
-    revenu_familial(x) < params.MAX_REV_FAM &&
-    (x.revenue_type.emploi || x.revenue_type.travailleur_autonome) &&
-    x.sante.frais_medicaux_admissibles == "true"
-  );
+  return x.sante.frais_medicaux_admissibles == "true";
 });
 csp1.type_credit = "Non remboursable";
 csp1.note = `Le crédit d’impôt pour frais médicaux a la particularité qu’il peut être demandé à l’égard de dépenses payées au cours d’une période de 12 mois consécutifs qui se termine pendant
