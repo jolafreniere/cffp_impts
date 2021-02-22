@@ -1230,9 +1230,6 @@ let cp0_b = Credit("Crédit d'impôt pour personne vivant seule", (x, params) =>
     x.logement_admissible == "true" &&
     x.age < 65 &&
     !x.hasPartner &&
-    hasKid(x, (kid) => {
-      return kid.age >= 18 && kid.status_etudiant == "temps_plein";
-    }) &&
     !hasKid(x, (kid) => {
       return (
         kid.age >= 18 &&
