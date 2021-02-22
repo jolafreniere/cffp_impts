@@ -1692,7 +1692,7 @@ let cpf2_6 = Credit("Montant pour revenus de retraite", (x, params) => {
   );
 });
 addMontantRetraiteInfo(cpf2_6);
-let cpf2_6a = Credit("Crédit en raison de l'âge", (x) => {
+let cpf2_6a = Credit("Crédit en raison de l'âge", (x, params) => {
   let cp = params["AGE_RET_PVS"];
   let kidO18NotStudyFullTime = hasKid(x, (kid) => {
     return kid.age >= 18 && kid.status_etudiant != "temps_plein";
